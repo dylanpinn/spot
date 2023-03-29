@@ -43,3 +43,14 @@ jobs:
         run: echo $CHUNKS | jq '.[${{ matrix.chunk }}] | .[] | @text' | xargs yarn ci:test
         env:
           CHUNKS: ${{ needs.setup.outputs['test-chunks'] }}
+
+  test-success:
+    runs-on: ubuntu-latest
+    name: test-success
+    needs:
+      - test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
