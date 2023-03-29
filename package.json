@@ -1,11 +1,11 @@
 {
-  "name": "@airtasker/spot",
+  "name": "@dylanpinn/spot",
   "version": "1.9.0",
-  "author": "Francois Wouts, Leslie Fung",
+  "author": "Dylan Pinn",
   "bin": {
     "spot": "./bin/run"
   },
-  "bugs": "https://github.com/airtasker/spot/issues",
+  "bugs": "https://github.com/dylanpinn/spot/issues",
   "dependencies": {
     "@oclif/command": "^1.8.22",
     "@oclif/config": "^1.17.0",
@@ -76,7 +76,7 @@
   ],
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "homepage": "https://github.com/airtasker/spot",
+  "homepage": "https://github.com/dylanpinn/spot",
   "license": "MIT",
   "oclif": {
     "commands": "./build/cli/src/commands",
@@ -85,7 +85,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "airtasker/spot",
+  "repository": "dylanpinn/spot",
   "scripts": {
     "build-docs": "webpack --config ./docs/webpack.config.js",
     "build": "tsc",
