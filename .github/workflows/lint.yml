@@ -19,3 +19,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
       - run: yarn lint:check
+
+  lint-success:
+    runs-on: ubuntu-latest
+    name: test-success
+    needs:
+      - lint
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
