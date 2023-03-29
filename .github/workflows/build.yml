@@ -22,7 +22,7 @@ jobs:
 
   build-success:
     runs-on: ubuntu-latest
-    name: test-success
+    name: build-success
     needs:
       - build
     steps:
