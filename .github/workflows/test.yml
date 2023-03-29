@@ -4,12 +4,33 @@ name: Test
 on: [push]
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      test-chunks: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
+      test-chunk-ids: ${{ steps['set-test-chunk-ids'].outputs['test-chunk-ids'] }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn install --frozen-lockfile
+      - id: set-test-chunks
+        name: Set Chunks
+        run: echo "::set-output name=test-chunks::$(npx jest --listTests --json | jq -cM '[_nwise(length / 6 | floor)]')"
+      - id: set-test-chunk-ids
+        name: Set Chunk IDs
+        run: echo "::set-output name=test-chunk-ids::$(echo $CHUNKS | jq -cM 'to_entries | map(.key)')"
+        env:
+          CHUNKS: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
+
+  test:
+    runs-on: ubuntu-latest
+    name: test (chunk ${{ matrix.chunk }}) using (Node ${{ matrix.node-version }})
+    needs:
+      - setup
 
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
+        chunk: ${{ fromJson(needs.setup.outputs['test-chunk-ids']) }}
 
     steps:
       - uses: actions/checkout@v3
@@ -18,4 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
-      - run: yarn ci:test
+      - name: jest
+        run: echo $CHUNKS | jq '.[${{ matrix.chunk }}] | .[] | @text' | xargs yarn ci:test
+        env:
+          CHUNKS: ${{ needs.setup.outputs['test-chunks'] }}
