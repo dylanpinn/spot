@@ -1,5 +1,5 @@
 import { Command, flags } from "@oclif/command";
-import { prompt } from "inquirer";
+import inquirer from "inquirer";
 import YAML from "js-yaml";
 import path from "path";
 import { Contract } from "../../../lib/src/definitions";
@@ -8,6 +8,8 @@ import { generateOpenAPI2 } from "../../../lib/src/generators/openapi2/openapi2"
 import { generateOpenAPI3 } from "../../../lib/src/generators/openapi3/openapi3";
 import { outputFile } from "../../../lib/src/io/output";
 import { parse } from "../../../lib/src/parser";
+
+const prompt = inquirer.prompt;
 
 export default class Generate extends Command {
   static description =
