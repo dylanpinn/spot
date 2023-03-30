@@ -32,7 +32,9 @@ export default class Checksum extends Command {
       const hash = hashContract(contract);
       this.log(hash);
     } catch (e) {
-      this.error(e, { exit: 1 });
+      if (e instanceof Error) {
+        this.error(e, { exit: 1 });
+      }
     }
   }
 }

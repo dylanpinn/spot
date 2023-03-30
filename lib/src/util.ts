@@ -58,7 +58,7 @@ export function tryCatch<T, E extends Error>(
   try {
     return ok(op());
   } catch (e) {
-    return err(e);
+    return err(e as E);
   }
 }
 

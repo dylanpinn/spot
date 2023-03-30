@@ -55,7 +55,9 @@ export default class Docs extends Command {
         this.log(`Open http://localhost:${port} to view documentation`);
         await server.listen(port);
       } catch (err) {
-        this.error(err, { exit: 1 });
+        if (err instanceof Error) {
+          this.error(err, { exit: 1 });
+        }
       }
     };
     start();
