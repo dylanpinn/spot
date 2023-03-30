@@ -100,5 +100,9 @@
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
     "eslint:fix": "eslint . --fix --ext .js,.ts,.tsx",
     "prettier:fix": "prettier --write \"**/*.js\" \"**/*.ts\" \"**/*.tsx\""
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "@dylanpinn:registry": "https://npm.pkg.github.com"
   }
 }
