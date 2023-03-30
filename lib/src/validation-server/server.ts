@@ -51,7 +51,9 @@ export function runValidationServer(port: number, contract: Contract) {
       };
       res.json(responseBody);
     } catch (error) {
-      res.status(500).send(makeInternalServerError([error.message]));
+      if (error instanceof Error) {
+        res.status(500).send(makeInternalServerError([error.message]));
+      }
     }
   });
 

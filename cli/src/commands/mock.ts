@@ -55,7 +55,9 @@ export default class Mock extends Command {
       }).defer();
       this.log(`Mock server is running on port ${port}.`);
     } catch (e) {
-      this.error(e, { exit: 1 });
+      if (e instanceof Error) {
+        this.error(e, { exit: 1 });
+      }
     }
   }
 }
