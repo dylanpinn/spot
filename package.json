@@ -7,7 +7,7 @@
   },
   "bugs": "https://github.com/dylanpinn/spot/issues",
   "dependencies": {
-    "@oclif/command": "^1.8.22",
+    "@oclif/command": "^1.8.29",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.3",
     "ajv": "^8.12.0",
